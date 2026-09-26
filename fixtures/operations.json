@@ -1,0 +1,160 @@
+{
+  "flights": [
+    {
+      "flight_no": "CZ2381",
+      "aircraft_type": "C919",
+      "registration": "B-919K",
+      "origin": "广州",
+      "destination": "重庆",
+      "scheduled_departure": "2026-09-26T09:30:00+08:00",
+      "tickets_sold": 132,
+      "frozen_capability_version": "WCV-CKG-C919-2026Q3-001",
+      "frozen_at": "2026-09-20T10:00:00+08:00",
+      "frozen_by": "运行控制部门-换季计划"
+    }
+  ],
+  "confirmations": [
+    {
+      "confirmation_id": "CONF-A-001",
+      "party": "机场",
+      "flight_no": "CZ2381",
+      "decision": "CONFIRMED",
+      "occurred_at": "2026-09-26T07:10:00+08:00",
+      "received_seq": 101
+    },
+    {
+      "confirmation_id": "CONF-H-001",
+      "party": "航司",
+      "flight_no": "CZ2381",
+      "decision": "CONFIRMED",
+      "occurred_at": "2026-09-26T07:10:05+08:00",
+      "received_seq": 102
+    }
+  ],
+  "maintenance_documents": [
+    {
+      "doc_id": "MRO-C919-2609-17",
+      "title": "C919航前故障保留与工卡（敏感）",
+      "content": "【受限正文】左组件温控活门历史故障保留，限航前按工卡XX-26复核……",
+      "required_role": "机务维修岗",
+      "condition": "spares",
+      "flight_no": "CZ2381",
+      "recorded_at": "2026-09-26T06:40:00+08:00"
+    }
+  ],
+  "events": [
+    {
+      "event_id": "EVT-001",
+      "flight_no": "CZ2381",
+      "stream": "aircraft",
+      "type": "人员调班",
+      "condition": "personnel",
+      "occurred_at": "2026-09-26T05:20:00+08:00",
+      "recorded_at": "2026-09-26T05:25:00+08:00",
+      "source": "排班系统",
+      "detail": "持C919授权机务由2人调整为1人在岗",
+      "authorized_mechanics_on_duty": 1,
+      "workaround": "从基地调派授权机务乘机增援，预计08:40到场",
+      "owner": "机务班组长"
+    },
+    {
+      "event_id": "EVT-002",
+      "flight_no": "CZ2381",
+      "stream": "aircraft",
+      "type": "设备故障",
+      "condition": "spares",
+      "occurred_at": "2026-09-26T06:30:00+08:00",
+      "recorded_at": "2026-09-26T06:42:00+08:00",
+      "source": "机务值班",
+      "detail": "C919专用液压工具车故障，首批航材包封存件缺1项",
+      "available": false,
+      "expected_available_at": "2026-09-26T10:10:00+08:00",
+      "workaround": "启用兄弟航站转借工具车，公路运输预计10:10到场",
+      "owner": "航材调度",
+      "doc_ref": "MRO-C919-2609-17"
+    },
+    {
+      "event_id": "EVT-003",
+      "flight_no": "CZ2381",
+      "stream": "aircraft",
+      "type": "强对流运行限制",
+      "condition": "route",
+      "occurred_at": "2026-09-26T07:00:00+08:00",
+      "recorded_at": "2026-09-26T07:01:00+08:00",
+      "source": "气象席位",
+      "detail": "目的地08:30-10:00雷暴伴风切变，落地标准短时不满足",
+      "weather_ok_at": "2026-09-26T10:30:00+08:00",
+      "workaround": "顺延至天气好转后放行，必要时备降贵阳",
+      "owner": "签派室值班签派员"
+    },
+    {
+      "event_id": "EVT-004",
+      "flight_no": "CZ2381",
+      "stream": "aircraft",
+      "type": "临时机位变化",
+      "condition": "bridge",
+      "occurred_at": "2026-09-26T07:20:00+08:00",
+      "recorded_at": "2026-09-26T07:22:00+08:00",
+      "source": "机坪管制",
+      "detail": "207廊桥临时故障，改211远机位，客梯车+摆渡车保障",
+      "stand": "211",
+      "bridge_compatible": false,
+      "workaround": "远机位客梯车保障，旅客步行/登机车方案已通知地服",
+      "owner": "机坪管制室"
+    },
+    {
+      "event_id": "EVT-005",
+      "flight_no": "CZ2381",
+      "stream": "passenger",
+      "type": "旅客到场",
+      "occurred_at": "2026-09-26T07:40:00+08:00",
+      "recorded_at": "2026-09-26T07:40:00+08:00",
+      "source": "离港系统",
+      "detail": "已有96名旅客通过专属值机柜台办理，航显正常",
+      "checked_in": 96
+    },
+    {
+      "event_id": "EVT-006",
+      "flight_no": "CZ2381",
+      "stream": "baggage",
+      "type": "行李分拣",
+      "occurred_at": "2026-09-26T08:05:00+08:00",
+      "recorded_at": "2026-09-26T08:06:00+08:00",
+      "source": "行李系统",
+      "detail": "远机位方案下行李改2号远机位分拣口，需二次盘驳",
+      "bags_loaded": 0,
+      "workaround": "增派1组分拣，二次盘驳增时25分钟",
+      "owner": "行李查询班长"
+    },
+    {
+      "event_id": "EVT-007",
+      "flight_no": "CZ2381",
+      "stream": "aircraft",
+      "type": "断网补录",
+      "condition": "personnel",
+      "occurred_at": "2026-09-26T05:50:00+08:00",
+      "recorded_at": "2026-09-26T08:20:00+08:00",
+      "source": "异地保障团队-黔江备降点",
+      "offline_backfill": true,
+      "detail": "05:50增援机务已从黔江发车（断网期间发生，08:20恢复联网补录）",
+      "authorized_mechanics_on_duty": 1,
+      "reinforcement_arrives_at": "2026-09-26T08:35:00+08:00",
+      "workaround": "增援到场时间修正为08:35",
+      "owner": "机务班组长"
+    },
+    {
+      "event_id": "EVT-008",
+      "flight_no": "CZ2381",
+      "stream": "aircraft",
+      "type": "临时机位变化",
+      "condition": "bridge",
+      "occurred_at": "2026-09-26T11:20:00+08:00",
+      "recorded_at": "2026-09-26T11:21:00+08:00",
+      "source": "机坪管制",
+      "detail": "207廊桥修复，航班恢复207靠桥机位，廊桥与C919舱门兼容",
+      "stand": "207",
+      "bridge_compatible": true,
+      "owner": "机坪管制室"
+    }
+  ]
+}

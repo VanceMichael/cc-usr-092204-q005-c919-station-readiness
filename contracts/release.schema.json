@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "逐航点放行评估结论",
+  "type": "object",
+  "required": [
+    "flight_no",
+    "at",
+    "frozen_version_id",
+    "decision",
+    "gaps",
+    "workarounds",
+    "last_owners",
+    "silent_downgrade_blocked",
+    "effective_confirmation",
+    "recompute_reason"
+  ],
+  "properties": {
+    "flight_no": { "type": "string", "description": "航班号" },
+    "at": { "type": "string", "description": "评估时刻 ISO8601" },
+    "frozen_version_id": { "type": "string", "description": "当日冻结的能力版本号" },
+    "decision": {
+      "type": "string",
+      "enum": ["GO", "NOGO", "DELAY"],
+      "description": "GO=按冻结标准满足；NOGO=条件不满足且无替代；DELAY=缺口有恢复或替代预期"
+    },
+    "gaps": {
+      "type": "array",
+      "description": "尚缺条件清单",
+      "items": {
+        "type": "object",
+        "required": ["condition", "label", "commitment", "status", "owner", "linked_from"],
+        "properties": {
+          "condition": { "type": "string", "description": "airport/aircraft_type/route/service_unit/personnel/spares/bridge/drill" },
+          "label": { "type": "string" },
+          "commitment": { "type": "string", "description": "冻结版本承诺" },
+          "status": { "type": "string", "enum": ["OK", "GAP", "LINKED_GAP", "RECOVERED"] },
+          "owner": { "type": "string", "description": "最后责任人" },
+          "linked_from": { "type": ["string", "null"], "description": "联动缺口的触发条件" },
+          "workaround": { "type": ["string", "null"], "description": "替代措施" },
+          "recovery_at": { "type": ["string", "null"], "description": "按冻结标准恢复的预计/实际时刻；null 表示只能靠降级替代，须显式决策" },
+          "downgrade": { "type": "boolean", "description": "替代措施是否低于冻结承诺（已售票航班不得自动接受）" },
+          "review_required": { "type": "boolean", "description": "是否为联动拖带的复核项" },
+          "event_refs": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "workarounds": { "type": "array", "items": { "type": "string" }, "description": "替代措施汇总" },
+    "last_owners": { "type": "array", "items": { "type": "string" }, "description": "缺口最后责任人去重" },
+    "silent_downgrade_blocked": { "type": "boolean", "description": "已售票航班存在未决缺口时是否拦截静默降级" },
+    "effective_confirmation": {
+      "type": ["object", "null"],
+      "description": "并发确认裁决后的唯一生效确认",
+      "required": ["confirmation_id", "party", "decision", "occurred_at", "reason"],
+      "properties": {
+        "confirmation_id": { "type": "string" },
+        "party": { "type": "string" },
+        "decision": { "type": "string" },
+        "occurred_at": { "type": "string" },
+        "reason": { "type": "string" }
+      }
+    },
+    "recompute_reason": { "type": ["string", "null"], "description": "本次重算触发事件类型" },
+    "timeline": {
+      "type": "array",
+      "description": "按真实发生时间排序的事件与评估记录（回放用）",
+      "items": {
+        "type": "object",
+        "required": ["occurred_at", "kind"],
+        "properties": {
+          "occurred_at": { "type": "string" },
+          "kind": { "type": "string", "enum": ["event", "evaluation"] },
+          "stream": { "type": ["string", "null"] },
+          "type": { "type": ["string", "null"] },
+          "detail": { "type": ["string", "null"] }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

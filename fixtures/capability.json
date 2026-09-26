@@ -1,0 +1,41 @@
+{
+  "waypoint": "重庆",
+  "capability_versions": [
+    {
+      "version_id": "WCV-CKG-C919-2026Q3-002",
+      "effective_from": "2026-09-26T00:00:00+08:00",
+      "note": "新航季换季后当日发布的加强版本，按冻结规则对当日已排航班不得自动启用",
+      "conditions": {
+        "airport": {"label": "机场专属承诺（值机/航显）", "required": true, "commitment": "C919专属值机柜台与专属航显", "owner": "地面服务部值班经理"},
+        "aircraft_type": {"label": "机型适配", "required": true, "commitment": "C919机型地面保障手册现行有效", "owner": "运控标准岗"},
+        "route": {"label": "航线与天气限制", "required": true, "commitment": "航线天气标准满足C919运行", "owner": "签派室值班签派员"},
+        "service_unit": {"label": "保障单位（含行李）", "required": true, "commitment": "专属行李分拣与装卸保障组", "owner": "行李查询班长"},
+        "personnel": {"label": "人员资质", "required": true, "commitment": "持C919授权机务3人、勤务骨干2人", "required_authorized": 3, "owner": "机务班组长"},
+        "spares": {"label": "备件工具", "required": true, "commitment": "C919首批航材包与专用工具到位", "owner": "航材调度"},
+        "bridge": {"label": "廊桥兼容", "required": true, "commitment": "209号靠桥机位，廊桥适配C919舱门", "owner": "机坪管制室"},
+        "drill": {"label": "演练结果", "required": true, "commitment": "C919首航综合演练验收合格", "owner": "质量管理岗"}
+      }
+    },
+    {
+      "version_id": "WCV-CKG-C919-2026Q3-001",
+      "effective_from": "2026-09-01T00:00:00+08:00",
+      "note": "换季计划冻结版本（当日航班实际采用基线）",
+      "conditions": {
+        "airport": {"label": "机场专属承诺（值机/航显）", "required": true, "commitment": "C919专属值机柜台与专属航显", "owner": "地面服务部值班经理"},
+        "aircraft_type": {"label": "机型适配", "required": true, "commitment": "C919机型地面保障手册现行有效", "owner": "运控标准岗"},
+        "route": {"label": "航线与天气限制", "required": true, "commitment": "航线天气标准满足C919运行", "owner": "签派室值班签派员"},
+        "service_unit": {"label": "保障单位（含行李）", "required": true, "commitment": "专属行李分拣与装卸保障组", "owner": "行李查询班长"},
+        "personnel": {"label": "人员资质", "required": true, "commitment": "持C919授权机务2人、勤务骨干2人", "required_authorized": 2, "owner": "机务班组长"},
+        "spares": {"label": "备件工具", "required": true, "commitment": "C919首批航材包与专用工具到位", "owner": "航材调度"},
+        "bridge": {"label": "廊桥兼容", "required": true, "commitment": "207号靠桥机位，廊桥适配C919舱门", "owner": "机坪管制室"},
+        "drill": {"label": "演练结果", "required": true, "commitment": "C919首航综合演练验收合格", "owner": "质量管理岗"}
+      }
+    }
+  ],
+  "linkage_rules": [
+    {"trigger": "personnel", "targets": ["spares", "drill"], "note": "授权人员缺位时，备件领用与演练有效性需连带复核"},
+    {"trigger": "spares", "targets": ["personnel"], "note": "备件工具不足时机务排故能力连带受限"},
+    {"trigger": "bridge", "targets": ["service_unit"], "note": "机位临时变化时行李与旅客引导方案需连带调整"},
+    {"trigger": "service_unit", "targets": ["airport"], "note": "保障单位失位时专属值机/航显承诺连带受影响"}
+  ]
+}

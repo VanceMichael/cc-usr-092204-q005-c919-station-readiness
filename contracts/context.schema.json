@@ -33,6 +33,10 @@
         "type": "string"
       },
       "description": "领域术语"
+    },
+    "sample_id": {
+      "type": "string",
+      "description": "样例编号"
     }
   },
   "additionalProperties": false
