@@ -35,5 +35,10 @@
       "description": "领域术语"
     }
   },
+    "sample_id": {
+      "type": "string",
+      "description": "去标识样例编号"
+    }
+  },
   "additionalProperties": false
 }

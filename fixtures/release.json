@@ -1,0 +1,375 @@
+{
+  "flight": {
+    "flight_no": "CZ0919",
+    "flight_date": "2026-09-26",
+    "airport": "ZXXX",
+    "aircraft_type": "C919",
+    "route": {
+      "origin": "ZXXX",
+      "destination": "ZGGG"
+    },
+    "ticketed": true
+  },
+  "frozen_version_id": "V-20260926-01",
+  "capability_versions": [
+    {
+      "version_id": "V-20260926-01",
+      "state": "frozen",
+      "effective_date": "2026-09-26",
+      "supersedes": null,
+      "items": [
+        {
+          "code": "checkin",
+          "status": "ready",
+          "owner": "机场地服",
+          "responsible_person": "值机班长A",
+          "mitigation": null,
+          "sensitive_detail": null
+        },
+        {
+          "code": "fids",
+          "status": "ready",
+          "owner": "机场信息",
+          "responsible_person": "航显值班B",
+          "mitigation": null,
+          "sensitive_detail": null
+        },
+        {
+          "code": "jetbridge",
+          "status": "ready",
+          "owner": "机场廊桥",
+          "responsible_person": "廊桥主管C",
+          "mitigation": null,
+          "sensitive_detail": null
+        },
+        {
+          "code": "baggage",
+          "status": "degraded",
+          "owner": "机场行李",
+          "responsible_person": "行李主管D",
+          "mitigation": {
+            "measure": "自动分拣检修，启用人工分拣双复核",
+            "provider": "机场行李分拣室",
+            "approved_by": "运行控制经理E"
+          },
+          "sensitive_detail": null
+        },
+        {
+          "code": "maintenance",
+          "status": "ready",
+          "owner": "航司机务",
+          "responsible_person": "机务放行师F",
+          "mitigation": null,
+          "sensitive_detail": {
+            "sensitivity": "maintenance",
+            "content": "构型补丁与工卡级别细节（示例脱敏）"
+          }
+        },
+        {
+          "code": "parts",
+          "status": "ready",
+          "owner": "航材保障",
+          "responsible_person": "航材调度G",
+          "mitigation": null,
+          "sensitive_detail": null
+        },
+        {
+          "code": "personnel",
+          "status": "ready",
+          "owner": "航司派驻",
+          "responsible_person": "业务骨干H",
+          "mitigation": null,
+          "sensitive_detail": null
+        },
+        {
+          "code": "drill",
+          "status": "ready",
+          "owner": "联合演练组",
+          "responsible_person": "演练指挥I",
+          "mitigation": null,
+          "sensitive_detail": null
+        }
+      ]
+    },
+    {
+      "version_id": "V-20261025-01",
+      "state": "draft",
+      "effective_date": "2026-10-25",
+      "supersedes": "V-20260926-01",
+      "items": [
+        {
+          "code": "checkin",
+          "status": "ready",
+          "owner": "机场地服",
+          "responsible_person": "值机班长A",
+          "mitigation": null,
+          "sensitive_detail": null
+        },
+        {
+          "code": "fids",
+          "status": "ready",
+          "owner": "机场信息",
+          "responsible_person": "航显值班B",
+          "mitigation": null,
+          "sensitive_detail": null
+        },
+        {
+          "code": "jetbridge",
+          "status": "ready",
+          "owner": "机场廊桥",
+          "responsible_person": "廊桥主管C",
+          "mitigation": null,
+          "sensitive_detail": null
+        },
+        {
+          "code": "baggage",
+          "status": "ready",
+          "owner": "机场行李",
+          "responsible_person": "行李主管D",
+          "mitigation": null,
+          "sensitive_detail": null
+        },
+        {
+          "code": "maintenance",
+          "status": "ready",
+          "owner": "航司机务",
+          "responsible_person": "机务放行师F",
+          "mitigation": null,
+          "sensitive_detail": null
+        },
+        {
+          "code": "parts",
+          "status": "ready",
+          "owner": "航材保障",
+          "responsible_person": "航材调度G",
+          "mitigation": null,
+          "sensitive_detail": null
+        },
+        {
+          "code": "personnel",
+          "status": "ready",
+          "owner": "航司派驻",
+          "responsible_person": "业务骨干H",
+          "mitigation": null,
+          "sensitive_detail": null
+        },
+        {
+          "code": "drill",
+          "status": "ready",
+          "owner": "联合演练组",
+          "responsible_person": "演练指挥I",
+          "mitigation": null,
+          "sensitive_detail": null
+        }
+      ]
+    }
+  ],
+  "assessments": [
+    {
+      "assessment_id": "A-0600-01",
+      "version_id": "V-20260926-01",
+      "decided_at": "2026-09-26T06:00:00+08:00",
+      "trigger": "initial",
+      "gaps": [
+        {
+          "code": "baggage",
+          "reason": "自动分拣设备计划检修",
+          "mitigation": {
+            "measure": "人工分拣双复核",
+            "provider": "机场行李分拣室"
+          },
+          "responsible_person": "行李主管D"
+        }
+      ],
+      "decision": "conditional"
+    },
+    {
+      "assessment_id": "A-0750-02",
+      "version_id": "V-20260926-01",
+      "decided_at": "2026-09-26T07:50:00+08:00",
+      "trigger": "stand_change",
+      "gaps": [
+        {
+          "code": "baggage",
+          "reason": "自动分拣设备计划检修",
+          "mitigation": {
+            "measure": "人工分拣双复核",
+            "provider": "机场行李分拣室"
+          },
+          "responsible_person": "行李主管D"
+        },
+        {
+          "code": "jetbridge",
+          "reason": "临时改远机位，廊桥不可用",
+          "mitigation": {
+            "measure": "摆渡车两组循环登机",
+            "provider": "机场摆渡车队"
+          },
+          "responsible_person": "廊桥主管C"
+        }
+      ],
+      "decision": "conditional"
+    },
+    {
+      "assessment_id": "A-0805-03",
+      "version_id": "V-20260926-01",
+      "decided_at": "2026-09-26T08:05:00+08:00",
+      "trigger": "equipment_fault",
+      "gaps": [
+        {
+          "code": "baggage",
+          "reason": "自动分拣设备计划检修",
+          "mitigation": {
+            "measure": "人工分拣双复核",
+            "provider": "机场行李分拣室"
+          },
+          "responsible_person": "行李主管D"
+        },
+        {
+          "code": "jetbridge",
+          "reason": "临时改远机位，廊桥不可用",
+          "mitigation": {
+            "measure": "摆渡车两组循环登机",
+            "provider": "机场摆渡车队"
+          },
+          "responsible_person": "廊桥主管C"
+        },
+        {
+          "code": "parts",
+          "reason": "专属工具故障，备件未到场",
+          "mitigation": null,
+          "responsible_person": "航材调度G"
+        }
+      ],
+      "decision": "no_go"
+    },
+    {
+      "assessment_id": "A-0840-04",
+      "version_id": "V-20260926-01",
+      "decided_at": "2026-09-26T08:40:00+08:00",
+      "trigger": "equipment_fault",
+      "gaps": [
+        {
+          "code": "baggage",
+          "reason": "自动分拣设备计划检修",
+          "mitigation": {
+            "measure": "人工分拣双复核",
+            "provider": "机场行李分拣室"
+          },
+          "responsible_person": "行李主管D"
+        },
+        {
+          "code": "jetbridge",
+          "reason": "临时改远机位，廊桥不可用",
+          "mitigation": {
+            "measure": "摆渡车两组循环登机",
+            "provider": "机场摆渡车队"
+          },
+          "responsible_person": "廊桥主管C"
+        },
+        {
+          "code": "parts",
+          "reason": "专属工具故障，邻近航站借调件已到场",
+          "mitigation": {
+            "measure": "邻近航站备件工具送达并完成核验",
+            "provider": "邻近航站航材"
+          },
+          "responsible_person": "航材调度G"
+        }
+      ],
+      "decision": "conditional"
+    }
+  ],
+  "confirmations": [
+    {
+      "confirmation_id": "CF-0900-01",
+      "version_id": "V-20260926-01",
+      "party": "airport",
+      "decided_at": "2026-09-26T09:00:00+08:00",
+      "proposed_decision": "conditional",
+      "status": "effective"
+    },
+    {
+      "confirmation_id": "CF-0900-02",
+      "version_id": "V-20260926-01",
+      "party": "airline",
+      "decided_at": "2026-09-26T09:00:00+08:00",
+      "proposed_decision": "conditional",
+      "status": "superseded"
+    },
+    {
+      "confirmation_id": "CF-0901-03",
+      "version_id": "V-20260926-01",
+      "party": "airline",
+      "decided_at": "2026-09-26T09:01:30+08:00",
+      "proposed_decision": "conditional",
+      "status": "superseded"
+    }
+  ],
+  "events": [
+    {
+      "event_id": "E-0640",
+      "stream": "aircraft",
+      "occurred_at": "2026-09-26T06:40:00+08:00",
+      "recorded_at": "2026-09-26T06:42:00+08:00",
+      "backfilled": false,
+      "summary": "C919调机落地，机务接机检查"
+    },
+    {
+      "event_id": "E-0655",
+      "stream": "passenger",
+      "occurred_at": "2026-09-26T06:55:00+08:00",
+      "recorded_at": "2026-09-26T10:32:00+08:00",
+      "backfilled": true,
+      "summary": "异地保障组确认摆渡车预置（断网补录）"
+    },
+    {
+      "event_id": "E-0730",
+      "stream": "passenger",
+      "occurred_at": "2026-09-26T07:30:00+08:00",
+      "recorded_at": "2026-09-26T07:30:30+08:00",
+      "backfilled": false,
+      "summary": "旅客抵达专属值机区"
+    },
+    {
+      "event_id": "E-0740",
+      "stream": "baggage",
+      "occurred_at": "2026-09-26T07:40:00+08:00",
+      "recorded_at": "2026-09-26T07:41:00+08:00",
+      "backfilled": false,
+      "summary": "行李人工分拣双复核启动"
+    },
+    {
+      "event_id": "E-0748",
+      "stream": "aircraft",
+      "occurred_at": "2026-09-26T07:48:00+08:00",
+      "recorded_at": "2026-09-26T07:50:00+08:00",
+      "backfilled": false,
+      "summary": "通知临时改远机位"
+    },
+    {
+      "event_id": "E-0802",
+      "stream": "aircraft",
+      "occurred_at": "2026-09-26T08:02:00+08:00",
+      "recorded_at": "2026-09-26T08:05:00+08:00",
+      "backfilled": false,
+      "summary": "专属工具故障，判定备件未到场"
+    },
+    {
+      "event_id": "E-0838",
+      "stream": "baggage",
+      "occurred_at": "2026-09-26T08:38:00+08:00",
+      "recorded_at": "2026-09-26T08:39:00+08:00",
+      "backfilled": false,
+      "summary": "借调备件工具到场核验完成"
+    },
+    {
+      "event_id": "E-0905",
+      "stream": "passenger",
+      "occurred_at": "2026-09-26T09:05:00+08:00",
+      "recorded_at": "2026-09-26T09:05:30+08:00",
+      "backfilled": false,
+      "summary": "摆渡车组织登机"
+    }
+  ]
+}

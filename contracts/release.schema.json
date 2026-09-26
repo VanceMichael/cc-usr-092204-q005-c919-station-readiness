@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/c919/release.schema.json",
+  "title": "C919逐航点放行数据包",
+  "description": "一个航班在一个航点的能力版本、重算评估、双方确认与运行事件",
+  "type": "object",
+  "required": ["flight", "capability_versions", "confirmations", "events"],
+  "additionalProperties": false,
+  "properties": {
+    "flight": { "$ref": "#/$defs/flight" },
+    "capability_versions": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/capability_version" }
+    },
+    "frozen_version_id": {
+      "type": "string",
+      "description": "当日采用并冻结的能力版本（R1）"
+    },
+    "assessments": {
+      "type": "array",
+      "description": "触发重算后产生的历次评估，历史保留（R2）",
+      "items": { "$ref": "#/$defs/assessment" }
+    },
+    "confirmations": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/confirmation" }
+    },
+    "events": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/event" }
+    }
+  },
+  "$defs": {
+    "flight": {
+      "type": "object",
+      "required": ["flight_no", "flight_date", "airport", "aircraft_type", "route", "ticketed"],
+      "additionalProperties": false,
+      "properties": {
+        "flight_no": { "type": "string" },
+        "flight_date": { "type": "string", "format": "date" },
+        "airport": { "type": "string", "description": "放行航点" },
+        "aircraft_type": { "const": "C919" },
+        "route": {
+          "type": "object",
+          "required": ["origin", "destination"],
+          "additionalProperties": false,
+          "properties": {
+            "origin": { "type": "string" },
+            "destination": { "type": "string" }
+          }
+        },
+        "ticketed": { "type": "boolean", "description": "是否已售票" }
+      }
+    },
+    "capability_version": {
+      "type": "object",
+      "required": ["version_id", "state", "effective_date", "items"],
+      "additionalProperties": false,
+      "properties": {
+        "version_id": { "type": "string" },
+        "state": { "enum": ["draft", "effective", "frozen", "retired"] },
+        "effective_date": { "type": "string", "format": "date" },
+        "items": {
+          "type": "array",
+          "minItems": 8,
+          "items": { "$ref": "#/$defs/support_item" }
+        },
+        "supersedes": { "type": ["string", "null"] }
+      }
+    },
+    "support_item": {
+      "type": "object",
+      "required": ["code", "status", "owner", "responsible_person"],
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "enum": ["checkin", "fids", "jetbridge", "baggage", "maintenance", "parts", "personnel", "drill"]
+        },
+        "status": { "enum": ["ready", "degraded", "absent"] },
+        "owner": { "type": "string", "description": "保障单位" },
+        "responsible_person": { "type": "string", "description": "最后责任人" },
+        "mitigation": {
+          "type": ["object", "null"],
+          "description": "降级或缺位时的替代措施，缺失即放行缺口",
+          "required": ["measure", "provider"],
+          "additionalProperties": false,
+          "properties": {
+            "measure": { "type": "string" },
+            "provider": { "type": "string" },
+            "approved_by": { "type": ["string", "null"], "description": "已售票航班降级须显式审批（R3）" }
+          }
+        },
+        "sensitive_detail": {
+          "type": ["object", "null"],
+          "description": "敏感维修资料，按岗位隔离（R5）",
+          "properties": {
+            "sensitivity": { "const": "maintenance" },
+            "content": { "type": "string" }
+          },
+          "required": ["sensitivity", "content"]
+        }
+      }
+    },
+    "assessment": {
+      "type": "object",
+      "required": ["assessment_id", "version_id", "decided_at", "trigger", "gaps", "decision"],
+      "additionalProperties": false,
+      "properties": {
+        "assessment_id": { "type": "string" },
+        "version_id": { "type": "string" },
+        "decided_at": { "type": "string", "format": "date-time" },
+        "trigger": {
+          "enum": ["initial", "crew_change", "equipment_fault", "weather_convection", "stand_change"]
+        },
+        "gaps": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["code", "reason", "mitigation", "responsible_person"],
+            "additionalProperties": false,
+            "properties": {
+              "code": { "type": "string" },
+              "reason": { "type": "string" },
+              "mitigation": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "required": ["measure", "provider"],
+                    "properties": {
+                      "measure": { "type": "string" },
+                      "provider": { "type": "string" }
+                    }
+                  },
+                  { "type": "null" }
+                ]
+              },
+              "responsible_person": { "type": "string" }
+            }
+          }
+        },
+        "decision": { "enum": ["go", "conditional", "no_go"] }
+      }
+    },
+    "confirmation": {
+      "type": "object",
+      "required": ["confirmation_id", "version_id", "party", "decided_at", "proposed_decision"],
+      "additionalProperties": false,
+      "properties": {
+        "confirmation_id": { "type": "string" },
+        "version_id": { "type": "string" },
+        "party": { "enum": ["airport", "airline"] },
+        "decided_at": { "type": "string", "format": "date-time" },
+        "proposed_decision": { "enum": ["go", "conditional", "no_go"] },
+        "status": {
+          "enum": ["effective", "superseded", "conflict"],
+          "description": "并发仲裁后只允许一个 effective（R4）"
+        }
+      }
+    },
+    "event": {
+      "type": "object",
+      "required": ["event_id", "stream", "occurred_at", "recorded_at", "summary"],
+      "additionalProperties": false,
+      "properties": {
+        "event_id": { "type": "string" },
+        "stream": { "enum": ["aircraft", "passenger", "baggage"] },
+        "occurred_at": { "type": "string", "format": "date-time", "description": "真实发生时间（R6）" },
+        "recorded_at": { "type": "string", "format": "date-time", "description": "系统记录时间" },
+        "backfilled": { "type": "boolean", "description": "断网补录标记" },
+        "summary": { "type": "string" }
+      }
+    }
+  }
+}
